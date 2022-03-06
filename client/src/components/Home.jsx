@@ -4,21 +4,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getVideogames } from '../actions'
 import { Link } from 'react-router-dom'
 import Card from './Card'
+import Paginate from './Paginate'
 
 export default function Home () {
     //useDispatch reemplaza al mapDispatchToProps -> Despacha una action al store. Esta es la única manera de desencadenar un cambio de estado.
     const dispatch = useDispatch()
 
     //useSelector reemplaza al mapStateToProps -> Selecciona la parte de la data del store que necesita el componente conectado
-    const allVideogames = useSelector((state) => state.videogames)
+    const allVideogames = useSelector((state) => state.videogames.data)
     const [currentPage, setCurrentPage] = useState(1)
     const [videogamesPerPage, setVideogamesPerPage] = useState(15)
-    const indexOfLastVideogame =currentPage * videogamesPerPage // 15
+    const lastVideogameOfPage = currentPage * videogamesPerPage // 15
+    const firstVideogameOfPage = lastVideogameOfPage - videogamesPerPage // 0
+    const currentVideogames = allVideogames?.slice(firstVideogameOfPage, lastVideogameOfPage)
 
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
     useEffect(() => {
         dispatch(getVideogames())
-    },[])
+    },[dispatch])
     
     function handleClick(e){
         e.preventDefault()
@@ -58,18 +64,25 @@ export default function Home () {
                         <option value="Api">Api videogames</option>
                         <option value="Created">User videogames</option>
                     </select>
+                    <Paginate
+                        videogamesPerPage={videogamesPerPage}
+                        allVideogames={allVideogames?.length}
+                        paginate={paginate}
+                    />
                     {
-                        allVideogames.data?.map(e => {
-                        
-                            return (
+                        currentVideogames?.map(e => (
                                 
                                 <Fragment>
                                     <Link to={'/videogame/' + e.id}>
-                                        <Card name={e.name} image={e.image} genres={e.genres} key={e.id} />
+                                        <Card name={e.name} 
+                                        image={e.image} 
+                                        genres={e.genres[0].name? e.genres.map((el, i) =>
+                                             i <= e.genres.length-2? el.name + ', ': el.name): e.genres.join(', ')}
+                                        key={e.id} />
                                     </Link>
                                 </Fragment>
                             )
-                        })
+                        )
                     }
                 </div>
             </div>
