@@ -3,19 +3,30 @@ const axios = require('axios');
 const { Videogame, Genre } = require('../db');
 
 const getApiVideogames = async function () {                      
-    const apiUrl = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
-    const apiInfo = await apiUrl.data.results.map(e => {
-        return {
-            id: e.id,
-            name: e.name,
-            image: e.background_image,
-            released: e.released,
-            rating: e.rating,
-            platforms: e.parent_platforms.map(e => e.platform.name),
-            genres: e.genres.map(e => e.name)
-        }
-    })
-    return apiInfo
+    //const apiUrl = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
+    let gamesResults = []
+    let apiRAWG = `https://api.rawg.io/api/games?key=${API_KEY}`
+    for (let index = 0; index < 5; index++) {
+        let games = (await axios.get(apiRAWG)).data
+
+
+        let dataGame = games.results.map((e) => {
+            var game = {
+                id: e.id,
+                name: e.name,
+                image: e.background_image,
+                released: e.released,
+                rating: e.rating,
+                platforms: e.parent_platforms.map(e => e.platform.name),
+                genres: e.genres.map(e => e.name)
+            }
+        
+            return game
+        })
+        apiRAWG = games.next;
+        gamesResults = gamesResults.concat(dataGame)
+    }
+    return gamesResults
 }
 
 const getDbVideogames = async function () {
