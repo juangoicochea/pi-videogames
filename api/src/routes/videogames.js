@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { Videogame } = require('../db')
-const { getAllVideogames, postVideogames } = require('./functions')
+const { getAllVideogames, getVideogameDetail, postVideogames } = require('./functions')
 const router = Router();
 
 router.get('/', async (req, res) => {
@@ -18,13 +18,13 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id
-    const allGames = await getAllVideogames()
+    const game = await getVideogameDetail(id)
     if(id){
-        let gameId = await allGames.filter(e => e.id == id)
-        gameId.length ?
-        res.status(200).json(gameId) :
+        res.status(200).json(game) 
+    } else {
         res.status(404).send("Can't find that videogame")
     }
+        
 })
 
 router.post('/', async (req, res) => {
