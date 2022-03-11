@@ -1,21 +1,24 @@
 import React from 'react'
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getVideogames } from '../actions'
+import { getVideogames, getGenres, filterVideogamesByGenre, filterCreated, orderBy } from '../actions'
 import { Link } from 'react-router-dom'
 import Card from './Card'
 import Paginate from './Paginate'
+import SearchBar from './SearchBar'
 
 export default function Home () {
     //useDispatch reemplaza al mapDispatchToProps -> Despacha una action al store. Esta es la única manera de desencadenar un cambio de estado.
     const dispatch = useDispatch()
 
     //useSelector reemplaza al mapStateToProps -> Selecciona la parte de la data del store que necesita el componente conectado
-    const allVideogames = useSelector((state) => state.videogames.data)
+    const allVideogames = useSelector((state) => state.videogames)
+    const allGenres = useSelector((state) => state.genres)
+    const [sort, setSort] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [videogamesPerPage, setVideogamesPerPage] = useState(15)
-    const lastVideogameOfPage = currentPage * videogamesPerPage // 15
-    const firstVideogameOfPage = lastVideogameOfPage - videogamesPerPage // 0
+    const lastVideogameOfPage = currentPage * videogamesPerPage //15
+    const firstVideogameOfPage = lastVideogameOfPage - videogamesPerPage //0
     const currentVideogames = allVideogames?.slice(firstVideogameOfPage, lastVideogameOfPage)
 
     const paginate = (pageNumber) => {
@@ -23,7 +26,8 @@ export default function Home () {
     }
 
     useEffect(() => {
-        dispatch(getVideogames())
+        dispatch(getVideogames()),
+        dispatch(getGenres())
     },[dispatch])
     
     function handleClick(e){
@@ -31,57 +35,73 @@ export default function Home () {
         dispatch(getVideogames())
     }
 
+    function handleFilterGenres(e){
+        dispatch(filterVideogamesByGenre(e.target.value))
+        setCurrentPage(1)
+    }
+
+    function handleFilterCreated(e){
+        dispatch(filterCreated(e.target.value))
+        setCurrentPage(1)
+    }
+
+    function handleSort(e){
+        dispatch(orderBy(e.target.value))
+        setCurrentPage(1)
+        setSort(e.target.value)
+    }
+
     return (
         <div>
-            <Link to='/videogame'>Add videogame</Link>
+            <Link to='/create'>Add videogame</Link>
             <h1>Videogame Home</h1>
-
+            <button onClick={e => {handleClick(e)}}>
+                All Videogames    
+            </button>
             <div className="filter">
                 <div>
                     <div>Filter by Genre</div>
-                    <select>
-                        <option default>All</option>
-                        {/* {genres.map((G) => (
-                            <option value={G.name}>{G.name}</option>
-                        ))} */}
-                        <option>Aca van los generos</option>
+                    <select onChange={e => handleFilterGenres(e)}>
+                        <option key='All' default>All</option>
+                        { allGenres?.map((e) => (
+                            <option value={e.name} key={e.name}>{e.name}</option>
+                        ))}
                     </select>
                 </div>
                 <div>
                     <div>Order</div>
-                    <select>
-                        <option value="All" default>All</option>
-                        <option value="asc_name">Alphabetically (A-Z)</option>
-                        <option value="desc_name">Alphabetically (Z-A)</option>
-                        <option value="asc_rating">Rating (Lower-Higher)</option>
-                        <option value="desc_rating">Rating (Higher-Lower)</option>
+                    <select onChange={e => handleSort(e)}>
+                        <option value="All" key='All' default>All</option>
+                        <option value="Asc_name" key="Asc_name">Alphabetically (A-Z)</option>
+                        <option value="Desc_name" key="Desc_name">Alphabetically (Z-A)</option>
+                        <option value="Asc_rating" key="Asc_rating">Rating (Lower-Higher)</option>
+                        <option value="Desc_rating" key="Desc_rating">Rating (Higher-Lower)</option>
                     </select>
                 </div>
                 <div>
                     <div>Filter by Creator</div>
-                        <select>
-                        <option default>All</option>
-                        <option value="Api">Api videogames</option>
-                        <option value="Created">User videogames</option>
+                        <select onChange={e => handleFilterCreated(e)}>
+                        <option value="All" key="All"  default>All</option>
+                        <option value="Api" key="Api">Api videogames</option>
+                        <option value="Created" key="Created">User videogames</option>
                     </select>
+                    <SearchBar />
                     <Paginate
                         videogamesPerPage={videogamesPerPage}
                         allVideogames={allVideogames?.length}
                         paginate={paginate}
                     />
                     {
-                        currentVideogames?.map(e => (
-                                
-                                <Fragment>
-                                    <Link to={'/videogame/' + e.id}>
-                                        <Card name={e.name} 
-                                        image={e.image} 
-                                        genres={e.genres[0].name? e.genres.map((el, i) =>
-                                             i <= e.genres.length-2? el.name + ', ': el.name): e.genres.join(', ')}
-                                        key={e.id} />
-                                    </Link>
-                                </Fragment>
-                            )
+                        currentVideogames.map(e => (
+                            <Link to={'/videogame/' + e.id}>
+                                <Card name={e.name} 
+                                image={e.image} 
+                                genres={e.genres[0].name ? e.genres.map((el, il) =>
+                                        il <= e.genres.length-2? el.name + ', ': el.name): e.genres.join(', ')}
+                                rating={e.rating}
+                                key={e.id} />
+                            </Link>
+                            ) 
                         )
                     }
                 </div>
