@@ -58,7 +58,7 @@ const getApiGenres = async function () {
 
 const getVideogameDetail = async function (id) { 
     if(id.length > 7 && typeof id === 'string' ){
-        const gameDb = await Videogame.findAll({
+        const videogamesDb = await Videogame.findAll({
             include:{
                 model: Genre,
                 attributes: ['name'],
@@ -67,7 +67,8 @@ const getVideogameDetail = async function (id) {
                 }
             }
         })
-        return gameDb[0]
+        let gameDB = await videogamesDb.filter(el => el.dataValues.id === id)
+        return gameDB[0].dataValues
     }                     
     let response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
     const game = {
