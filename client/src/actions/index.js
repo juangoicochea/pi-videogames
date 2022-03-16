@@ -50,11 +50,18 @@ export function orderByRating(payload){
 
 export function searchByName(payload){
     return async function(dispatch){
-        const json = await axios(`http://localhost:3001/videogames?name=${payload}`)
-        dispatch({
-            type: 'SEARCH_BY_NAME',
-            payload: json.data
-        })
+        try {
+            const json = await axios(`http://localhost:3001/videogames?name=${payload}`)
+            dispatch({
+                type: 'SEARCH_BY_NAME',
+                payload: json.data
+            })
+        } catch(error) {
+            dispatch({
+                type: 'SEARCH_BY_NAME',
+                payload: []
+            })
+        }
     }
 }
 

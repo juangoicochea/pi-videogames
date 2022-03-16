@@ -1,0 +1,12 @@
+.container {
+    width: 80%;
+    padding: 0 10% 0 10%;
+    height: 100%;
+    top: 106px;
+    position: absolute;
+    text-align: center;
+}
+.container p {
+    font-size: 1.2em;
+    float: none;
+}

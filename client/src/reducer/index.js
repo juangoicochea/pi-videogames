@@ -1,9 +1,10 @@
 
 const initialState = {
     videogames : [],
-    allVideogames : [],
+    videogamesBackup : [],
     genres: [],
-    detail: []
+    detail: [],
+    filtered: []
 }
 
 function rootReducer (state=initialState, action){
@@ -12,7 +13,7 @@ function rootReducer (state=initialState, action){
             return {
                 ...state,
                 videogames: action.payload,
-                allVideogames: action.payload
+                videogamesBackup: action.payload
             }
         case 'GET_GENRES':
             return {
@@ -20,22 +21,29 @@ function rootReducer (state=initialState, action){
                 genres: action.payload
             }
         case 'FILTER_BY_GENRE':
-            const allVideogames = state.allVideogames
+            const allVideogames = state.videogamesBackup
             const gamesFiltered = action.payload === 'All' ? allVideogames : allVideogames?.filter(e => e.genres[0].name? e.genres.find(el => el.name === action.payload) : e.genres.includes(action.payload))
             return {
                 ...state,
-                videogames: gamesFiltered
+                videogames: gamesFiltered,
+                filtered: gamesFiltered
             }
         case 'FILTER_CREATED':
-            const allVideogamesLoaded= state.allVideogames
+            const allVideogamesLoaded= state.videogamesBackup
             const createdFilter = action.payload === 'Created' ? allVideogamesLoaded.filter(e => e.created_db) : allVideogamesLoaded.filter(e => !e.created_db)
             return {
                 ...state,
                 videogames: action.payload === 'All' ? allVideogamesLoaded : createdFilter
             }
         case 'ORDER_BY':
-            const loadedVideogames= state.allVideogames
+            let loadedVideogames = state.filtered
+            if(loadedVideogames.length === 0){
+                loadedVideogames = state.videogames
+            } 
             let orderBy = ''
+            if(action.payload === 'All') {
+                orderBy = state.videogamesBackup
+            }
             if(action.payload === 'Asc_name') {
                 orderBy = loadedVideogames.sort((a, b) => {
                     if(a.name > b.name) {

@@ -1,0 +1,74 @@
+.container {
+    width: 80%;
+    padding: 0 10% 0 10%;
+    height: 100%;
+    top: 56px;
+    position: absolute;
+
+    background-image: url('../Home/images/api-videogames-background-4.jpg');
+    background-position: top center;
+    background-image: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.containerForm {
+    width: 70%;
+    height: auto;
+    background-color: #001219;
+    margin: 170px auto 0 auto;
+    padding: 100px 15% 100px 15%;
+    position: relative;
+    float: left;
+    text-align: center;
+}
+.formItems {
+    width: 100%;
+    text-align: left;
+    height: auto;
+    float: left;
+    margin-bottom: 20px;
+}
+.formItems input, .formItems select {
+    float: left;
+    width: 100%;
+
+    clip-path: 
+      polygon(
+        0 0%,
+        100% 0,
+        100% 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        15px 100%,
+        0% 20px,
+        0% 100%
+      );
+      border-bottom: 4px solid #EE9B00;
+}
+.formItems select {
+    width: 101%;
+}
+.formLabels {
+    margin-bottom: 8px;
+}
+.formItems p {
+    margin-bottom: 0;
+    color: #BB3E03;
+}
+.formLabels span {
+    font-size: 1.3em;
+    color: #BB3E03;
+}
+.PGLists li {
+    display: inline-block;
+    margin: 8px 11px 
+}
+.PGLists li span {
+    font-size: 1.3em;
+    color: #BB3E03;
+    margin-left: 2px;
+}

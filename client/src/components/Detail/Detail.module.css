@@ -1,0 +1,84 @@
+.containerMainImage {
+    width: 100%;
+    height: 650px;
+    contain: content;
+    border-bottom: 2px solid #EE9B00;
+}
+.containerMainImage img {
+    width: 100%;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+.description {
+    float: left;
+    width: 70%;
+    margin-bottom: 150px;
+}
+.containerItems {
+    float: right;
+    width: 25%;
+    margin-bottom: 60px;
+}
+.stars {
+    color: gold;
+    -webkit-text-stroke: 0;
+}
+.items {
+    width: 100%;
+    position: relative;
+    float: right;
+}
+.items p {
+    margin: 9px 0;
+    text-align: right;
+}
+.itemButton {
+    width: 100%;
+    position: relative;
+    float: right;
+    text-align: right;
+    margin-top: 7px;
+}
+.loadingImage {
+    margin-top: 130px;
+}
+.loadingImageContainer {
+    text-align: center;
+}
+.emptySpace {
+    height: 150px;
+}
+@media screen and (max-width: 1200px) {
+    .description {
+        width: 65%;
+    }
+    .containerItems {
+        float: right;
+        width: 35%;
+    }
+    .containerMainImage img {
+        margin-top: 0;
+    }
+    .containerMainImage {
+        height: auto;
+    }
+}
+@media screen and (max-width: 800px) {
+    .description {
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .containerMainImage {
+        margin-top: 100px;
+    }
+    .containerItems {
+        float: left;
+        width: 100%;
+    }
+    .items, .items p, .itemButton {
+        float: left;
+        text-align: center;
+    }
+}

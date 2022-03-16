@@ -1,0 +1,41 @@
+.container {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.container ul {
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content;
+}
+.container li {
+    display: block;
+    width: 42px;
+    height: 27px;
+    float: left;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    padding-top: 5px;
+    background-color: #005F73;
+    cursor: pointer;
+
+    clip-path: 
+      polygon(
+        0 0%,
+        100% 0,
+        100% 0,
+        100% 0,
+        100% 100%,
+        0 100%,
+        25% 100%,
+        0% 75%,
+        0% 100%
+      );
+
+    transition: all 0.2s;
+}
+.container li:hover {
+    background-color: #EE9B00;
+}

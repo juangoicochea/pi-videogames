@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from '../Paginate/Paginate.module.css'
 
 export default function Paginate ({ videogamesPerPage, allVideogames, paginate }) {
     const pageNumbers = []
@@ -8,7 +9,7 @@ export default function Paginate ({ videogamesPerPage, allVideogames, paginate }
     }
 
     return (
-        <nav>
+        <div className={styles.container}>
             <ul className='paginate'>
                 {
                     pageNumbers && pageNumbers.map(number => (
@@ -19,6 +20,6 @@ export default function Paginate ({ videogamesPerPage, allVideogames, paginate }
                     ))
                 }
             </ul>
-        </nav>
+        </div>
     )
 }

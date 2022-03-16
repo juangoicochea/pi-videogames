@@ -1,0 +1,42 @@
+.container {
+    width: 80%;
+    padding: 0 10% 0 10%;
+    height: 100%;
+    top: 56px;
+    position: absolute;
+
+    background-image: url('../Home/images/api-videogames-background-4.jpg');
+    background-position: top center;
+    background-image: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.containerText {
+    background: url('../AboutMe/images/hadouken.gif');
+    background-position: top right;
+    background-repeat: no-repeat;
+    width: 70%;
+    height: auto;
+    background-color: #001219;
+    margin: 170px auto 0 auto;
+    padding: 100px 15% 100px 15%;
+    position: relative;
+    float: left;
+    text-align: left;
+}
+.containerText p {
+    float: left;
+}
+.containerText img {
+    width: 60px;
+    margin-left: 12px;
+    vertical-align: top;
+
+    transition: all 0.2s;
+}
+.containerText img:hover {
+    opacity: 0.8;
+}

@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@900&display=swap');
+.background h1 {
+    font-family: 'Exo', sans-serif;
+    z-index: 3;
+
+    transition: all 0.2s;
+}
+
+.background h1:hover {
+    margin: 10px 10px 20px 0;
+}
+.background {
+    position : absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../LandingPage/images/api-videogames-landingpage.jpg');
+    background-position: center center;
+    background-image: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-attachment: fixed;
+}
+.containerSquares {
+    /* background-color: white; */
+    background-image: url('../LandingPage/images/api-videogames-landingpage-square.jpg');
+    background-size: cover;
+    width: 1321px;
+    height: 597px;
+    position: fixed;
+    top: 5%;
+    z-index: 0;
+}
+.backgroundSquares {
+    width: 160px;
+    height: 383px;
+    background-size: cover;
+    position: absolute;
+
+    transition: all 0.2s;
+}
+.backgroundSquares:hover {
+    opacity: 1;
+    transform: scale(1.05);
+	-webkit-animation: flash 1.5s;
+	animation: flash 1.5s;
+}
+@keyframes flash {
+	0% {
+		opacity: .4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.backgroundContainer {
+    background-color: white;
+    width: 160px;
+    height: 383px;
+    position: absolute;
+}
+.backgroundContainer1 {
+    left: 0;
+}
+.background1 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-1.jpg');
+}
+.backgroundContainer2 {
+    left: 164px;
+}
+.background2 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-2.jpg');
+}
+.backgroundContainer3 {
+    left: 329px;
+}
+.background3 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-3.jpg');
+}
+.backgroundContainer4 {
+    left: 495px;
+}
+.background4 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-4.jpg');
+}
+.backgroundContainer5 {
+    left: 660px;
+}
+.background5 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-5.jpg');
+}
+.backgroundContainer6 {
+    left: 826px;
+}
+.background6 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-6.jpg');
+}
+.backgroundContainer7 {
+    left: 994px;
+}
+.background7 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-7.jpg');
+}
+.backgroundContainer8 {
+    left: 1161px;
+}
+.background8 {
+    background-image: url('../LandingPage/images/api-videogames-landingpage-8.jpg');
+}
+.logo {
+    margin-top: 13%;
+    background-image: url('../LandingPage/images/api-videogames-logo-b.png');
+    background-repeat: no-repeat;
+    width: 182px;
+    height: 215px;
+    z-index: 2;
+
+    transition: all 0.2s;
+}
+.logo:hover {
+    width: 190px;
+    height: 220px;  
+}

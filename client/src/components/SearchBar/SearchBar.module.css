@@ -1,0 +1,25 @@
+.container {
+    float: left;
+    margin-top: 11px;
+}
+@media screen and (max-width: 1200px) {
+    .container {
+        float: none;
+        width: fit-content;
+        height: auto;
+        margin: 0 auto -40px auto;
+        position: relative;
+    }
+}
+@media screen and (max-width: 800px) {
+    .container {
+        width: 100%;
+    }
+    .container input {
+        width: 65%;
+        margin-top: 18px;
+    }
+    .container button {
+        width: 30%;
+    }
+}
