@@ -162,65 +162,67 @@ export default function CreateVideogame () {
      }
 
      return (
-        <div className={styles.container}>
+         <div>
             <NavBar />
-            <div className={styles.containerForm}>
-                <h1>Create your videogame</h1>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className={styles.formItems}>
-                        <div className={styles.formLabels}>Name<span>*</span></div>
-                        <input type='text' value={input.name} name='name' placeholder='Insert name' onChange={(e) => handleChange(e)} />
-                        {errors.name && (<p>{errors.name}</p>)}
-                    </div>
-                    <div className={styles.formItems}>
-                        <div className={styles.formLabels}>Image</div>
-                        <input type='text' value={input.image} name='image' placeholder='Image url' onChange={(e) => handleChange(e)} onBlur={(e) => handleBlur(e)} />
-                        {errors.image && (<p>{errors.image}</p>)}
-                    </div>
-                    <div className={styles.formItems}>
-                        <div className={styles.formLabels}>Description<span>*</span></div>
-                        <input type='text' value={input.description} name='description' placeholder='Insert description' onChange={(e) => handleChange(e)} />
-                        {errors.description && (<p>{errors.description}</p>)}
-                    </div>
-                    <div className={styles.formItems}>
-                        <div className={styles.formLabels}>Release date</div>
-                        <input type='date' value={input.release_date} name='release_date' placeholder='Insert date' onChange={(e) => handleChange(e)} />
-                    </div>
-                    <div className={styles.formItems}>
-                        <div className={styles.formLabels}>Rating</div>
-                        <input type='number' value={input.rating} name='rating' placeholder='Insert rating' onChange={(e) => handleChange(e)} onBlur={(e) => handleBlur(e)} />
-                        {errors.rating && (<p>{errors.rating}</p>)}
-                    </div>
-                    <div className={styles.formItems}>
-                        <div className={styles.formLabels}>Platforms<span>*</span></div>
-                        <select name='platforms' onChange={(e) => handleSelectPlatforms(e)}>
-                            <option disabled selected value>Select...</option>
-                            {getAllPlatforms()}
-                        </select>
-                        <ul className={styles.PGLists}>
-                            {input.platforms.map(e => 
-                                <li>{e} <span onClick={() => handleDeletePlatforms(e)}>x</span></li>
-                                )}
-                        </ul>
-                        {errors.platforms && (<p>{errors.platforms}</p>)}
-                    </div>
-                    <div className={styles.formItems}>
-                        <div className={styles.formLabels}>Genres<span>*</span></div>
-                        <select name='genres' onChange={(e) => handleSelectGenres(e)}>
-                            <option disabled selected value>Select...</option>
-                            {getAllGenres()}
-                        </select>
-                        <ul className={styles.PGLists}>
-                            {input.genres.map(e => 
-                                <li>{e} <span onClick={() => handleDeleteGenres(e)}>x</span></li>
-                                )}
-                        </ul>
-                        {errors.genres && (<p>{errors.genres}</p>)}
-                    </div>
-                    {Object.keys(errors).length === 0 && input.name.length >= 1 && (
-                        <button type='submit'>Create videogame</button>
-                    )}
-                </form>
+            <div className={styles.container}>
+                <div className={styles.containerForm}>
+                    <h1>Create your videogame</h1>
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <div className={styles.formItems}>
+                            <div className={styles.formLabels}>Name<span>*</span></div>
+                            <input type='text' value={input.name} name='name' placeholder='Insert name' onChange={(e) => handleChange(e)} />
+                            {errors.name && (<p>{errors.name}</p>)}
+                        </div>
+                        <div className={styles.formItems}>
+                            <div className={styles.formLabels}>Image</div>
+                            <input type='text' value={input.image} name='image' placeholder='Image url' onChange={(e) => handleChange(e)} onBlur={(e) => handleBlur(e)} />
+                            {errors.image && (<p>{errors.image}</p>)}
+                        </div>
+                        <div className={styles.formItems}>
+                            <div className={styles.formLabels}>Description<span>*</span></div>
+                            <input type='text' value={input.description} name='description' placeholder='Insert description' onChange={(e) => handleChange(e)} />
+                            {errors.description && (<p>{errors.description}</p>)}
+                        </div>
+                        <div className={styles.formItems}>
+                            <div className={styles.formLabels}>Release date</div>
+                            <input type='date' value={input.release_date} name='release_date' placeholder='Insert date' onChange={(e) => handleChange(e)} />
+                        </div>
+                        <div className={styles.formItems}>
+                            <div className={styles.formLabels}>Rating</div>
+                            <input type='number' value={input.rating} name='rating' placeholder='Insert rating' onChange={(e) => handleChange(e)} onBlur={(e) => handleBlur(e)} />
+                            {errors.rating && (<p>{errors.rating}</p>)}
+                        </div>
+                        <div className={styles.formItems}>
+                            <div className={styles.formLabels}>Platforms<span>*</span></div>
+                            <select name='platforms' onChange={(e) => handleSelectPlatforms(e)}>
+                                <option disabled selected value>Select...</option>
+                                {getAllPlatforms()}
+                            </select>
+                            <ul className={styles.PGLists}>
+                                {input.platforms.map(e => 
+                                    <li>{e} <span onClick={() => handleDeletePlatforms(e)}>x</span></li>
+                                    )}
+                            </ul>
+                            {errors.platforms && (<p>{errors.platforms}</p>)}
+                        </div>
+                        <div className={styles.formItems}>
+                            <div className={styles.formLabels}>Genres<span>*</span></div>
+                            <select name='genres' onChange={(e) => handleSelectGenres(e)}>
+                                <option disabled selected value>Select...</option>
+                                {getAllGenres()}
+                            </select>
+                            <ul className={styles.PGLists}>
+                                {input.genres.map(e => 
+                                    <li>{e} <span onClick={() => handleDeleteGenres(e)}>x</span></li>
+                                    )}
+                            </ul>
+                            {errors.genres && (<p>{errors.genres}</p>)}
+                        </div>
+                        {Object.keys(errors).length === 0 && input.name.length >= 1 && (
+                            <button type='submit'>Create videogame</button>
+                        )}
+                    </form>
+                </div>
             </div>
         </div>
      )

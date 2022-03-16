@@ -36,7 +36,7 @@ export default function Detail(props){
                         <h1>{videogame.name}</h1>
                         <div className={styles.description} dangerouslySetInnerHTML={{ __html: videogame.description }} />
                         <div className={styles.containerItems}>
-                            <div className={styles.items}><p><b>Released: </b>{videogame.released}</p></div>
+                            <div className={styles.items}><p><b>Released: </b>{videogame.released ? videogame.released : videogame.release_date}</p></div>
                             <div className={styles.items}><p><b>Rating: </b>{videogame.rating} {ratingStars(videogame.rating)}</p></div>
                             <div className={styles.items}><p><b>Platforms: </b>{videogame.platforms[0].name ? videogame.platforms.map((e, i) => 
                                 i <= videogame.platforms.length-2? e.name + ', ': e.name): videogame.platforms.join(', ')}</p></div>

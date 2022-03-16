@@ -71,4 +71,10 @@
     font-size: 1.3em;
     color: #BB3E03;
     margin-left: 2px;
+    cursor: pointer;
+
+    transition: all 0.2s;
+}
+.PGLists li span:hover {
+    color: #b38f7e;
 }
