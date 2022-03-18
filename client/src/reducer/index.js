@@ -101,6 +101,14 @@ function rootReducer (state=initialState, action){
             return {
                 ...state
             }
+        case 'DELETE':
+            return {
+                ...state
+            }
+        case 'UPDATE':
+            return {
+                ...state
+            }
         case 'GET_DETAIL':
             return {
                 ...state,

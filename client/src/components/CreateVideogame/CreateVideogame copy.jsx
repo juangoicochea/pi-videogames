@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
-import { postVideogame, getGenres, getVideogames, updateVideogame, getDetail } from '../../actions'
+import { Link, useHistory } from 'react-router-dom'
+import { postVideogame, getGenres, getVideogames } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import NavBar from '../NavBar/NavBar'
 import styles from '../CreateVideogame/CreateVideogame.module.css'
@@ -43,12 +43,9 @@ function validateBlur(input) {
 export default function CreateVideogame () {
      const dispatch = useDispatch()
      const history = useHistory()
-     const { id } = useParams()
      const allGenres = useSelector((state) => state.genres)
      const allPlatforms = useSelector((state) => state.videogames)
-     const videogame = useSelector((state) => state.detail)
      const [ errors, setErrors ] = useState({})
-     const [updated, setUpdated] = useState(false)
 
      const [ input, setInput ] = useState({
          name: '',
@@ -62,9 +59,8 @@ export default function CreateVideogame () {
 
      useEffect(() => {
         dispatch(getVideogames()),
-        dispatch(getGenres()),
-        id && dispatch(getDetail(id))
-     }, [dispatch, id])
+        dispatch(getGenres())
+     }, [dispatch])
 
      function getAllPlatforms() {
         let data = allPlatforms.flatMap((e, i) => (e.platforms))
@@ -117,7 +113,7 @@ export default function CreateVideogame () {
         if(!input.genres.includes(e.target.value)) {
             setInput({
                 ...input,
-                genres: [...input.genres, {name: e.target.value}]
+                genres: [...input.genres, e.target.value]
             })
         }
         setErrors(validate({
@@ -147,24 +143,11 @@ export default function CreateVideogame () {
             genres: input.genres.filter(gen => gen !== e)
         }))
     }
-    
 
      function handleSubmit(e) {
          e.preventDefault()
-        let getGenres = []
-        input.genres.forEach(e => {
-            e.name ? getGenres.push(e.name) : getGenres.push(e)
-        });
-        input.genres = getGenres
-
-        if(!id) {
-            dispatch(postVideogame(input))
-            alert('Videogame created')
-        } else {
-            dispatch(updateVideogame(id, input))
-            alert('Videogame updated')
-        }
-         
+         dispatch(postVideogame(input))
+         alert('Videogame created')
          setInput({
             name: '',
             image: '',
@@ -175,19 +158,6 @@ export default function CreateVideogame () {
             genres: []  
          })
          history.push('/home')
-    }
-
-     if(id &&  videogame.name && !updated) {
-        setInput({
-            name: videogame.name,
-            image: videogame.image,
-            description: videogame.description,
-            release_date: videogame.release_date,
-            rating: videogame.rating,
-            platforms: videogame.platforms,
-            genres: videogame.genres  
-         })
-         setUpdated(!updated);
      }
 
      return (
@@ -195,8 +165,7 @@ export default function CreateVideogame () {
             <NavBar />
             <div className={styles.container}>
                 <div className={styles.containerForm}>
-                    {!id ? <h1>Create your videogame</h1> :
-                    <h1>Update videogame</h1>}
+                    <h1>Create your videogame</h1>
                     <form onSubmit={(e) => handleSubmit(e)}>
                         <div className={styles.formItems}>
                             <div className={styles.formLabels}>Name<span>*</span></div>
@@ -243,14 +212,13 @@ export default function CreateVideogame () {
                             </select>
                             <ul className={styles.PGLists}>
                                 {input.genres.map(e => 
-                                    <li>{e.name ? e.name : e} <span onClick={() => handleDeleteGenres(e)}>x</span></li>
+                                    <li>{e} <span onClick={() => handleDeleteGenres(e)}>x</span></li>
                                     )}
                             </ul>
                             {errors.genres && (<p>{errors.genres}</p>)}
                         </div>
                         {Object.keys(errors).length === 0 && input.name.length >= 1 && (
-                            !id ? <button type='submit'>Create videogame</button> :
-                            <button type='submit'>Update videogame</button>
+                            <button type='submit'>Create videogame</button>
                         )}
                     </form>
                 </div>

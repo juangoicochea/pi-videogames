@@ -13,7 +13,6 @@ export default function Paginate ({ videogamesPerPage, allVideogames, paginate }
             <ul className='paginate'>
                 {
                     pageNumbers && pageNumbers.map(number => (
-                        
                         <li className='number' key={number}>
                             <a onClick={() => paginate(number)}>{number}</a>
                         </li>

@@ -72,6 +72,13 @@ export function postVideogame(payload){
     }
 }
 
+export function updateVideogame(id, data){
+    return async function(){
+        const json = await axios.put(`http://localhost:3001/videogames/${id}`, data) 
+        return json
+    }
+}
+
 export function getDetail(payload){
     return async function(dispatch){
         const json = await axios(`http://localhost:3001/videogames/${payload}`)
@@ -79,5 +86,11 @@ export function getDetail(payload){
             type: 'GET_DETAIL',
             payload: json.data
         })
+    }
+}
+export function deleteVideogame(payload){
+    return async function(dispatch){
+        const json = await axios.delete(`http://localhost:3001/videogames/${payload}`)
+        return json
     }
 }

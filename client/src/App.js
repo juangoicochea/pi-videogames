@@ -15,6 +15,7 @@ function App() {
           <Route exact path='/' component={LandingPage} />
           <Route exact path='/home' component={Home} />
           <Route exact path='/create' component={CreateVideogame} />
+          <Route exact path='/update/:id' component={CreateVideogame} />
           <Route exact path='/aboutme' component={AboutMe} />
           <Route exact path='/videogame/:id' component={Detail} />
           <Route path='*' component={Error404} />

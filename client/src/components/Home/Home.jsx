@@ -15,12 +15,12 @@ export default function Home () {
     const allVideogames = useSelector((state) => state.videogames)
     const allGenres = useSelector((state) => state.genres)
     const [sort, setSort] = useState('')
-    const [currentPage, setCurrentPage] = useState(1)
     const [loader, setLoader] = useState(true);
-    const [videogamesPerPage, setVideogamesPerPage] = useState(15)
-    const lastVideogameOfPage = currentPage * videogamesPerPage //15
-    const firstVideogameOfPage = lastVideogameOfPage - videogamesPerPage //0
-    const currentVideogames = allVideogames?.slice(firstVideogameOfPage, lastVideogameOfPage)
+    const [currentPage, setCurrentPage] = useState(1)
+    const videogamesPerPage = 15
+    const lastVideogameOfPage = currentPage * videogamesPerPage
+    const firstVideogameOfPage = lastVideogameOfPage - videogamesPerPage
+    const videogamesOfActualPage = allVideogames?.slice(firstVideogameOfPage, lastVideogameOfPage)
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -47,10 +47,10 @@ export default function Home () {
         setSort(e.target.value)
     }
 
-    if (currentVideogames.length > 0 && loader) {
+    if (videogamesOfActualPage.length > 0 && loader) {
         setLoader(false);
     }
-
+    
     return (
         <div>
             <NavBar />
@@ -91,20 +91,21 @@ export default function Home () {
 
                 <div className={styles.gridvideogames}>
                     {
-                        currentVideogames.length > 0 && !loader ? (
-                            currentVideogames.map(e => (
+                        videogamesOfActualPage.length > 0 && !loader ? (
+                            videogamesOfActualPage.map(e => (
                                 <Card 
                                     id={e.id}
                                     name={e.name} 
-                                    image={e.image} 
-                                    genres={e.genres[0].name ? e.genres.map((el, il) =>
-                                            il <= e.genres.length-2? el.name + ', ': el.name): e.genres.join(', ')}
+                                    image={e.image}
+                                    genres={e.genres.map((el, il) =>
+                                        el.name ? il <= e.genres.length-2? el.name + ', ': el.name 
+                                        : il <= e.genres.length-2? el + ', ': el)}
                                     rating={e.rating}
                                     key={e.id} 
                                 />
                             ) 
                         )
-                        ) : !currentVideogames.length > 0 && loader ? (
+                        ) : !videogamesOfActualPage.length > 0 && loader ? (
                             <img src={loadingImage} alt='Loading videogames' />
                         ) : (
                             <div className={styles.center}>
@@ -116,7 +117,7 @@ export default function Home () {
                 </div>
                 <Paginate
                     videogamesPerPage={videogamesPerPage}
-                    allVideogames={allVideogames?.length}
+                    allVideogames={allVideogames.length}
                     paginate={paginate}
                 />
                 <div className={styles.emptySpace}></div>
