@@ -98,13 +98,13 @@ const postVideogames = async function (data) {
     } = data
 
     let gameCreated = await Videogame.create({
-        name,
-        description,
-        image,
-        release_date,
-        rating,
-        platforms,
-        created_db,
+            name,
+            description,
+            image,
+            release_date,
+            rating,
+            platforms,
+            created_db
     })
 
     let gameGenresDb = await Genre.findAll({
@@ -113,9 +113,39 @@ const postVideogames = async function (data) {
     gameCreated.addGenre(gameGenresDb)
 }
 
+const updateVideogames = async function (game, data) {
+    let {
+        name,
+        description,
+        image,
+        release_date,
+        rating,
+        platforms,
+        genres,
+        created_db
+
+    } = data
+
+    let gameUpdated = await game.update({
+            name,
+            description,
+            image,
+            release_date,
+            rating,
+            platforms,
+            created_db
+    })
+
+    let gameGenresDb = await Genre.findAll({
+            where: { name: genres }
+    })
+    await gameUpdated.setGenres(gameGenresDb)
+}
+
 module.exports = {
     getAllVideogames,
     getApiGenres,
     postVideogames,
-    getVideogameDetail
+    getVideogameDetail,
+    updateVideogames
 }
