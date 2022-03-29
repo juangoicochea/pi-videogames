@@ -1,7 +1,7 @@
 # Hardcore Gaming Zone
 
 <p align="center">
-  <img height="350" src="./videogame.png" />
+  <img src="./videogame.png" />
 </p>
 
 ## 📝Description:
