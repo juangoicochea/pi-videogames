@@ -15,10 +15,10 @@ export default function AboutMe() {
                     <p>This is my individual project where I applied all the technologies that I learned, like React with Redux for the frontend and Sequelize with Postgres for the backend and data base.</p>
                     <p>This App is 100% responsive made it with CSS Modules.</p>
                     <p>If you are interested for kwon more about my skills you can get in touch at:
-                        <a href='https://www.linkedin.com/in/juan-carlos-goicochea-b319b181/'>
+                        <a href='https://www.linkedin.com/in/juan-goicochea/'>
                         <img src={linkedin} alt='Linkedin icon' />
                         </a>
-                        <a href='https://github.com/juanopeth4/'>
+                        <a href='https://github.com/juangoicochea/'>
                             <img src={github} alt='Github icon' />
                         </a>
                         </p></div> 
