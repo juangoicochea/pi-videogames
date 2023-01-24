@@ -1,4 +1,4 @@
-# Hardcore Gaming Zone
+# Hardcore Gaming Zone - Videogames App
 
 <p align="center">
   <img src="./videogame.png" />
@@ -48,7 +48,7 @@ __Videogame creation route__: contains
 - [ ] Button/Option to create a new video game
 
 __Videogame update route__: contains
-- [ ] A form __controllled with JavaScript__ that updates the following fields of the videogames created:
+- [ ] A form __controlled with JavaScript__ that updates the following fields of the videogames created:
   - Name
   - Description
   - Release date
